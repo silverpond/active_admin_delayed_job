@@ -34,13 +34,13 @@ ActiveAdmin.register Delayed::Job, :as => "Background Job" do
     column :status do |job|
       case job.state
       when 'failed'
-        status_tag "Failed:", :error 
+        status_tag "Failed:", class: :error 
         span "#{job.last_error[0..100]}" 
       when 'running'
-        status_tag "Running", :warning
+        status_tag "Running", class: :warning
         span "for #{time_ago_in_words(job.locked_at)} @ #{job.locked_by}"   
       when 'scheduled'
-        status_tag "Scheduled", :ok
+        status_tag "Scheduled", class: :ok
         span "for #{time_ago_in_words(job.run_at)} from now" 
       else
         status_tag "Queued" 
